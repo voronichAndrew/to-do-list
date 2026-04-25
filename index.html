@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager Pro | Редакция 2024</title>
+    <title>Task Manager Pro</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -26,22 +26,20 @@
         </div>
     </header>
 
-    <!-- Поиск (Кнопка теперь такая же как Добавить) -->
+    <!-- Строка поиска -->
     <div class="input-group">
         <input type="text" id="search-input" placeholder="Поиск задач...">
-        <button onclick="searchTasks()" class="action-btn purple">Найти</button>
+        <button onclick="searchTasks()" class="btn-primary btn-search">Найти</button>
     </div>
     
-    <!-- Поле ввода -->
+    <!-- Строка добавления -->
     <div class="input-group">
         <input type="text" id="input-box" placeholder="Напишите новую задачу...">
-        <button onclick="addTask()" class="action-btn blue">Добавить</button>
+        <button onclick="addTask()" class="btn-primary btn-add">Добавить</button>
     </div>
 
     <div class="list-wrapper">
-        <ul id="list-container">
-            <!-- Задачи -->
-        </ul>
+        <ul id="list-container"></ul>
     </div>
 
     <div class="footer">
