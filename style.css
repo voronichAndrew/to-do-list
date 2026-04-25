@@ -18,145 +18,170 @@ body {
 
 .background-decor {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 20% 30%, #4f46e5 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, #ec4899 0%, transparent 40%);
-    filter: blur(60px);
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at 10% 10%, #4f46e5 0%, transparent 50%),
+                radial-gradient(circle at 90% 90%, #7c3aed 0%, transparent 50%);
+    filter: blur(80px);
     z-index: -1;
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
 .todo-app {
     width: 100%;
-    max-width: 600px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
+    max-width: 650px; /* Еще чуть шире */
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 40px;
-    border-radius: 30px;
+    border-radius: 35px;
     color: #fff;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
 }
 
-header { margin-bottom: 25px; }
-.header-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; }
-h2 { font-size: 32px; letter-spacing: -1px; }
-.stats-text { opacity: 0.6; font-size: 14px; }
+header { margin-bottom: 30px; }
+.header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+h2 { font-size: 34px; font-weight: 700; }
+.stats-text { opacity: 0.5; font-size: 14px; }
 
 /* Прогресс */
 .progress-container {
-    width: 100%;
-    height: 8px;
+    width: 100%; height: 10px;
     background: rgba(255,255,255,0.1);
-    border-radius: 10px;
-    margin-bottom: 5px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    overflow: hidden;
 }
 .progress-bar {
-    height: 100%;
-    width: 0%;
-    background: #22c55e;
-    border-radius: 10px;
-    transition: width 0.4s ease;
-    box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #10b981, #34d399);
+    border-radius: 20px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.progress-info { font-size: 12px; text-align: right; color: #22c55e; font-weight: 600; }
+.progress-info { font-size: 13px; text-align: right; color: #34d399; font-weight: 600; }
 
-/* Поля ввода и поиска */
-.search-row, .input-row {
+/* Группы ввода (Поиск и Добавление) */
+.input-group {
     display: flex;
-    background: rgba(255,255,255,0.07);
-    border-radius: 15px;
-    padding: 5px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 18px;
+    padding: 6px;
     margin-bottom: 15px;
     border: 1px solid rgba(255,255,255,0.1);
 }
 
 input {
     flex: 1;
-    border: none;
-    outline: none;
+    border: none; outline: none;
     background: transparent;
-    padding: 12px 15px;
+    padding: 12px 20px;
     color: #fff;
     font-size: 16px;
 }
 
-.search-btn, button {
-    border: none;
-    outline: none;
-    padding: 10px 20px;
-    border-radius: 12px;
+/* Одинаковые кнопки для Поиска и Добавления */
+.action-btn {
+    border: none; outline: none;
+    padding: 12px 25px;
+    border-radius: 14px;
     cursor: pointer;
+    font-weight: 600;
+    color: white;
     transition: 0.3s;
+    min-width: 110px;
 }
 
-.search-btn { background: rgba(255,255,255,0.1); color: white; margin-left: 5px; }
-.search-btn:hover { background: rgba(255,255,255,0.2); }
+.action-btn.blue { background: #4f46e5; }
+.action-btn.blue:hover { background: #6366f1; transform: translateY(-2px); }
 
-.input-row button { background: #4f46e5; color: white; font-weight: 600; }
-.input-row button:hover { background: #6366f1; }
+.action-btn.purple { background: #7c3aed; }
+.action-btn.purple:hover { background: #8b5cf6; transform: translateY(-2px); }
 
 /* Список */
-.list-wrapper { max-height: 400px; overflow-y: auto; margin-top: 10px; padding-right: 5px; }
+.list-wrapper { 
+    max-height: 450px; 
+    overflow-y: auto; 
+    margin-top: 15px; 
+    padding-right: 10px;
+}
+
+.list-wrapper::-webkit-scrollbar { width: 6px; }
+.list-wrapper::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
 ul li {
     list-style: none;
-    padding: 18px 50px 18px 60px;
+    padding: 20px 60px 20px 65px;
     background: rgba(255,255,255,0.03);
-    border-radius: 15px;
-    margin-bottom: 10px;
+    border-radius: 18px;
+    margin-bottom: 12px;
     position: relative;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.3s;
     border: 1px solid transparent;
+    animation: fadeIn 0.3s ease;
 }
-ul li:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.1); }
 
-/* Кастомный чекбокс */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+ul li:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.1); }
+
+/* Чекбокс кружком */
 ul li::before {
     content: '';
     position: absolute;
-    height: 22px;
-    width: 22px;
-    border: 2px solid #4f46e5;
+    height: 24px; width: 24px;
+    border: 2px solid #6366f1;
     border-radius: 50%;
-    left: 20px;
-    top: 50%;
+    left: 22px; top: 50%;
     transform: translateY(-50%);
     transition: 0.3s;
 }
 
 ul li.checked { color: rgba(255,255,255,0.3); text-decoration: line-through; }
 ul li.checked::before {
-    background: #22c55e;
-    border-color: #22c55e;
+    background: #10b981;
+    border-color: #10b981;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
-    background-size: 14px;
+    background-size: 16px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.delete-btn {
+.delete-icon {
     position: absolute;
-    right: 20px;
-    top: 50%;
+    right: 20px; top: 50%;
     transform: translateY(-50%);
     color: rgba(255,255,255,0.2);
-    font-size: 18px;
+    transition: 0.3s;
+    padding: 10px;
 }
-.delete-btn:hover { color: #ef4444; }
+.delete-icon:hover { color: #ef4444; }
 
+/* Подвал со статистикой */
 .footer {
-    margin-top: 25px;
-    padding-top: 20px;
+    margin-top: 30px;
+    padding-top: 25px;
     border-top: 1px solid rgba(255,255,255,0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.detailed-stats { display: flex; gap: 20px; font-size: 13px; font-weight: 600; }
-.stat-box span { color: #4f46e5; margin-left: 4px; font-size: 15px; }
+.detailed-stats { display: flex; gap: 25px; }
+.stat-box { font-size: 13px; color: rgba(255,255,255,0.5); }
+.stat-box span { color: #fff; font-weight: 700; margin-left: 5px; font-size: 16px; }
 
-.clear-btn { background: transparent; border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; padding: 8px 15px; font-size: 12px; }
+.clear-btn {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.3s;
+}
 .clear-btn:hover { background: #ef4444; color: white; }
