@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список дел — Веб-дизайн</title>
+    <title>Minimal To-Do List</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <div class="todo-app">
-        <h2>Список дел <img src="https://cdn-icons-png.flaticon.com/512/4697/4697260.png" alt="icon"></h2>
-        
-        <div class="row">
-            <input type="text" id="input-box" placeholder="Добавьте вашу задачу...">
-            <button onclick="addTask()">Добавить</button>
-        </div>
-
-        <ul id="list-container">
-            <!-- Задачи будут появляться здесь -->
-        </ul>
+<div class="todo-app">
+    <h2>
+        Задачи 
+        <img src="https://cdn-icons-png.flaticon.com/512/2666/2666505.png" alt="icon">
+    </h2>
+    
+    <div class="row">
+        <input type="text" id="input-box" placeholder="Что нужно сделать?">
+        <button onclick="addTask()">OK</button>
     </div>
+
+    <ul id="list-container">
+        <!-- Место для задач -->
+    </ul>
 </div>
 
 <script src="script.js"></script>
