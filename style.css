@@ -19,34 +19,33 @@ body {
 .background-decor {
     position: absolute;
     width: 100%; height: 100%;
-    background: radial-gradient(circle at 10% 10%, #4f46e5 0%, transparent 50%),
-                radial-gradient(circle at 90% 90%, #7c3aed 0%, transparent 50%);
+    background: radial-gradient(circle at 15% 15%, #312e81 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, #4c1d95 0%, transparent 40%);
     filter: blur(80px);
     z-index: -1;
-    opacity: 0.4;
 }
 
 .todo-app {
     width: 100%;
-    max-width: 650px; /* Еще чуть шире */
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(25px);
+    max-width: 650px;
+    background: rgba(30, 41, 59, 0.7); /* Темный матовый фон как на скрине */
+    backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 40px;
     border-radius: 35px;
     color: #fff;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
 }
 
 header { margin-bottom: 30px; }
 .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-h2 { font-size: 34px; font-weight: 700; }
+h2 { font-size: 36px; font-weight: 700; letter-spacing: -1px; }
 .stats-text { opacity: 0.5; font-size: 14px; }
 
-/* Прогресс */
+/* Прогресс-бар */
 .progress-container {
-    width: 100%; height: 10px;
-    background: rgba(255,255,255,0.1);
+    width: 100%; height: 8px;
+    background: rgba(255,255,255,0.05);
     border-radius: 20px;
     margin-bottom: 8px;
     overflow: hidden;
@@ -54,80 +53,84 @@ h2 { font-size: 34px; font-weight: 700; }
 .progress-bar {
     height: 100%; width: 0%;
     background: linear-gradient(90deg, #10b981, #34d399);
-    border-radius: 20px;
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 0.6s ease;
 }
-.progress-info { font-size: 13px; text-align: right; color: #34d399; font-weight: 600; }
+.progress-info { font-size: 13px; text-align: right; color: #10b981; font-weight: 600; }
 
-/* Группы ввода (Поиск и Добавление) */
+/* Контейнеры для ввода */
 .input-group {
     display: flex;
-    background: rgba(255,255,255,0.05);
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
     border-radius: 18px;
-    padding: 6px;
-    margin-bottom: 15px;
-    border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 input {
     flex: 1;
-    border: none; outline: none;
+    border: none;
+    outline: none;
     background: transparent;
-    padding: 12px 20px;
+    padding: 10px 20px;
     color: #fff;
     font-size: 16px;
 }
 
-/* Одинаковые кнопки для Поиска и Добавления */
-.action-btn {
-    border: none; outline: none;
-    padding: 12px 25px;
+input::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+/* СТИЛЬ КНОПОК: одинаковые и выделяющиеся */
+.btn-primary {
+    width: 130px; /* Фиксированная ширина для симметрии */
+    height: 48px;
+    border: none;
     border-radius: 14px;
-    cursor: pointer;
+    color: #fff;
     font-weight: 600;
-    color: white;
-    transition: 0.3s;
-    min-width: 110px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.action-btn.blue { background: #4f46e5; }
-.action-btn.blue:hover { background: #6366f1; transform: translateY(-2px); }
-
-.action-btn.purple { background: #7c3aed; }
-.action-btn.purple:hover { background: #8b5cf6; transform: translateY(-2px); }
-
-/* Список */
-.list-wrapper { 
-    max-height: 450px; 
-    overflow-y: auto; 
-    margin-top: 15px; 
-    padding-right: 10px;
+/* Цвет для Найти */
+.btn-search {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
 }
 
-.list-wrapper::-webkit-scrollbar { width: 6px; }
+/* Цвет для Добавить */
+.btn-add {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.2);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+}
+
+/* Список задач */
+.list-wrapper { max-height: 400px; overflow-y: auto; margin-top: 20px; padding-right: 10px; }
+.list-wrapper::-webkit-scrollbar { width: 5px; }
 .list-wrapper::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
 
 ul li {
     list-style: none;
-    padding: 20px 60px 20px 65px;
+    padding: 18px 60px 18px 65px;
     background: rgba(255,255,255,0.03);
-    border-radius: 18px;
+    border-radius: 20px;
     margin-bottom: 12px;
     position: relative;
     cursor: pointer;
     transition: 0.3s;
     border: 1px solid transparent;
-    animation: fadeIn 0.3s ease;
 }
+ul li:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-ul li:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.1); }
-
-/* Чекбокс кружком */
 ul li::before {
     content: '';
     position: absolute;
@@ -136,7 +139,6 @@ ul li::before {
     border-radius: 50%;
     left: 22px; top: 50%;
     transform: translateY(-50%);
-    transition: 0.3s;
 }
 
 ul li.checked { color: rgba(255,255,255,0.3); text-decoration: line-through; }
@@ -154,34 +156,32 @@ ul li.checked::before {
     right: 20px; top: 50%;
     transform: translateY(-50%);
     color: rgba(255,255,255,0.2);
-    transition: 0.3s;
-    padding: 10px;
+    font-size: 18px;
 }
 .delete-icon:hover { color: #ef4444; }
 
-/* Подвал со статистикой */
+/* Статистика внизу */
 .footer {
     margin-top: 30px;
     padding-top: 25px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255,255,255,0.08);
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.detailed-stats { display: flex; gap: 25px; }
-.stat-box { font-size: 13px; color: rgba(255,255,255,0.5); }
-.stat-box span { color: #fff; font-weight: 700; margin-left: 5px; font-size: 16px; }
+.detailed-stats { display: flex; gap: 20px; }
+.stat-box { font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 600; }
+.stat-box span { color: #6366f1; margin-left: 5px; font-size: 16px; }
 
 .clear-btn {
-    background: rgba(239, 68, 68, 0.1);
+    background: transparent;
     border: 1px solid rgba(239, 68, 68, 0.2);
     color: #ef4444;
     padding: 10px 20px;
     border-radius: 12px;
     cursor: pointer;
     font-size: 12px;
-    font-weight: 600;
     transition: 0.3s;
 }
 .clear-btn:hover { background: #ef4444; color: white; }
