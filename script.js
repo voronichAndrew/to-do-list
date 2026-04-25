@@ -1,94 +1,88 @@
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
+const searchInput = document.getElementById("search-input");
 
-// Функция добавления задачи
 function addTask() {
-    if (inputBox.value.trim() === '') {
-        alert("Напишите что-нибудь!");
-    } else {
-        let li = document.createElement("li");
-        li.innerHTML = inputBox.value;
-        listContainer.appendChild(li);
-        
-        let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
-        li.appendChild(span);
+    const taskText = inputBox.value.trim();
+    if (taskText === '') {
+        inputBox.classList.add("error");
+        setTimeout(() => inputBox.classList.remove("error"), 300);
+        return;
     }
+
+    let li = document.createElement("li");
+    li.innerHTML = taskText;
+    
+    // Кнопка удаления
+    let del = document.createElement("span");
+    del.innerHTML = '<i class="fas fa-trash-alt"></i>';
+    del.className = "delete-btn";
+    li.appendChild(del);
+
+    listContainer.appendChild(li);
     inputBox.value = "";
-    updateStats();
-    saveData();
+    
+    updateAll();
 }
 
-// Клик по задаче или крестику
+// Слушатель кликов
 listContainer.addEventListener("click", function(e) {
     if (e.target.tagName === "LI") {
         e.target.classList.toggle("checked");
-        updateStats();
-        saveData();
-    } else if (e.target.tagName === "SPAN") {
-        e.target.parentElement.remove();
-        updateStats();
-        saveData();
+    } else if (e.target.parentElement.classList.contains("delete-btn")) {
+        e.target.closest("li").remove();
     }
+    updateAll();
 }, false);
 
-// Очистить всё
-function clearAll() {
-    if(confirm("Удалить все задачи?")) {
-        listContainer.innerHTML = "";
-        updateStats();
-        saveData();
-    }
-}
-
-// Фильтрация
-function filterTasks(filter) {
-    const tasks = listContainer.querySelectorAll("li");
-    const btns = document.querySelectorAll(".filter-btn");
+// Поиск
+function searchTasks() {
+    const term = searchInput.value.toLowerCase();
+    const tasks = listContainer.getElementsByTagName("li");
     
-    btns.forEach(btn => btn.classList.remove("active"));
-    event.target.classList.add("active");
-
-    tasks.forEach(task => {
-        switch(filter) {
-            case 'all':
-                task.style.display = "block";
-                break;
-            case 'active':
-                task.style.display = !task.classList.contains("checked") ? "block" : "none";
-                break;
-            case 'completed':
-                task.style.display = task.classList.contains("checked") ? "block" : "none";
-                break;
-        }
+    Array.from(tasks).forEach(task => {
+        const text = task.textContent.toLowerCase();
+        task.style.display = text.includes(term) ? "block" : "none";
     });
 }
 
-// Обновление статистики
-function updateStats() {
+// Обновление всей статистики и прогресса
+function updateAll() {
     const tasks = listContainer.querySelectorAll("li");
-    const checkedTasks = listContainer.querySelectorAll("li.checked");
-    document.getElementById("total-count").innerHTML = tasks.length;
-    document.getElementById("done-count").innerHTML = checkedTasks.length;
+    const completed = listContainer.querySelectorAll("li.checked");
+    
+    const total = tasks.length;
+    const done = completed.length;
+    const pending = total - done;
+    const percent = total === 0 ? 0 : Math.round((done / total) * 100);
+
+    // Обновляем текст
+    document.getElementById("total-tasks").textContent = total;
+    document.getElementById("done-count").textContent = done;
+    document.getElementById("pending-count").textContent = pending;
+    document.getElementById("percent-complete").textContent = percent + "%";
+
+    // Обновляем прогресс-бар
+    document.getElementById("progress-bar").style.width = percent + "%";
+
+    saveData();
 }
 
-// Работа с датой
-function setDate() {
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const today = new Date();
-    document.getElementById("current-date").innerHTML = today.toLocaleDateString("ru-RU", options);
+function clearAll() {
+    if (confirm("Удалить все задачи?")) {
+        listContainer.innerHTML = "";
+        updateAll();
+    }
 }
 
-// Локальное хранилище
 function saveData() {
-    localStorage.setItem("data", listContainer.innerHTML);
+    localStorage.setItem("myTasksData", listContainer.innerHTML);
 }
 
-function showTask() {
-    listContainer.innerHTML = localStorage.getItem("data") || "";
-    updateStats();
+function loadData() {
+    listContainer.innerHTML = localStorage.getItem("myTasksData") || "";
+    updateAll();
 }
 
-// Запуск при загрузке
-setDate();
-showTask();
+// Загрузка при старте
+loadData();
