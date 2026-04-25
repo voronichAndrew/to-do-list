@@ -3,25 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal To-Do List</title>
+    <title>Pro-Tasker | Мой Список Дел</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Иконки для кнопок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-<div class="todo-app">
-    <h2>
-        Задачи 
-        <img src="https://cdn-icons-png.flaticon.com/512/2666/2666505.png" alt="icon">
-    </h2>
-    
-    <div class="row">
-        <input type="text" id="input-box" placeholder="Что нужно сделать?">
-        <button onclick="addTask()">OK</button>
-    </div>
+<div class="container">
+    <div class="todo-app">
+        <header>
+            <div class="date-box">
+                <span id="current-date"></span>
+            </div>
+            <h2>Задачи <img src="https://cdn-icons-png.flaticon.com/512/4697/4697260.png" alt="icon"></h2>
+        </header>
+        
+        <div class="input-row">
+            <input type="text" id="input-box" placeholder="Что планируем сделать?">
+            <button onclick="addTask()">Добавить</button>
+        </div>
 
-    <ul id="list-container">
-        <!-- Место для задач -->
-    </ul>
+        <!-- Статистика -->
+        <div class="stats-container">
+            <div class="stat-item">Всего: <span id="total-count">0</span></div>
+            <div class="stat-item">Сделано: <span id="done-count">0</span></div>
+        </div>
+
+        <!-- Фильтры -->
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterTasks('all')">Все</button>
+            <button class="filter-btn" onclick="filterTasks('active')">В работе</button>
+            <button class="filter-btn" onclick="filterTasks('completed')">Готово</button>
+        </div>
+
+        <ul id="list-container">
+            <!-- Задачи -->
+        </ul>
+
+        <div class="footer">
+            <button class="clear-all" onclick="clearAll()">Очистить всё <i class="fas fa-trash-alt"></i></button>
+        </div>
+    </div>
 </div>
 
 <script src="script.js"></script>
