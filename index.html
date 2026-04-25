@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Task Manager</title>
+    <title>Task Manager Pro</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -14,13 +14,10 @@
 <div class="todo-app">
     <header>
         <div class="header-top">
-            <h2 id="greeting">Мои задачи</h2>
-            <div class="stats-text">
-                <span id="total-tasks">0</span> задач всего
-            </div>
+            <h2>Задачи</h2>
+            <div class="stats-text">Всего задач: <b id="total-tasks">0</b></div>
         </div>
 
-        <!-- Прогресс-бар -->
         <div class="progress-container">
             <div class="progress-bar" id="progress-bar"></div>
         </div>
@@ -29,31 +26,32 @@
         </div>
     </header>
 
-    <!-- Поле поиска -->
+    <!-- Поиск с кнопкой -->
     <div class="search-row">
-        <i class="fas fa-search"></i>
-        <input type="text" id="search-input" placeholder="Поиск по списку..." onkeyup="searchTasks()">
+        <input type="text" id="search-input" placeholder="Найти задачу...">
+        <button onclick="searchTasks()" class="search-btn">
+            <i class="fas fa-search"></i>
+        </button>
     </div>
     
     <!-- Поле ввода -->
     <div class="input-row">
-        <input type="text" id="input-box" placeholder="Добавить новую задачу...">
-        <button onclick="addTask()">Добавить <i class="fas fa-plus"></i></button>
+        <input type="text" id="input-box" placeholder="Что нужно сделать?">
+        <button onclick="addTask()">Добавить</button>
     </div>
 
-    <!-- Список задач -->
     <div class="list-wrapper">
         <ul id="list-container">
-            <!-- Задачи появятся здесь -->
+            <!-- Сюда будут добавляться задачи -->
         </ul>
     </div>
 
     <div class="footer">
         <div class="detailed-stats">
-            <span><i class="fas fa-check-circle"></i> Готово: <b id="done-count">0</b></span>
-            <span><i class="fas fa-clock"></i> В работе: <b id="pending-count">0</b></span>
+            <div class="stat-box">Готово: <span id="done-count">0</span></div>
+            <div class="stat-box">В работе: <span id="pending-count">0</span></div>
         </div>
-        <button class="clear-btn" onclick="clearAll()">Очистить всё</button>
+        <button class="clear-btn" onclick="clearAll()">Удалить всё</button>
     </div>
 </div>
 
