@@ -1,49 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif; /* Более современный шрифт */
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
-    /* Новый минималистичный фон */
-    background-color: #f5f7fa;
+    /* Новый яркий градиент: от фиолетового к бирюзовому */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B8DD6 100%);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
 }
 
 .todo-app {
-    width: 100%;
-    max-width: 400px;
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 24px; /* Более скругленные углы */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Мягкая, почти незаметная тень */
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#current-date {
+    font-size: 14px;
+    color: #888;
+    font-weight: 500;
 }
 
 h2 {
-    color: #1a1a1a;
-    font-weight: 500;
-    margin-bottom: 25px;
+    color: #2c3e50;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 12px;
+    font-size: 28px;
+    margin-top: 5px;
 }
 
 h2 img {
-    width: 24px;
+    width: 32px;
 }
 
-.row {
+.input-row {
     display: flex;
-    background: #f1f3f5;
+    background: #f1f3f8;
     border-radius: 12px;
-    padding: 5px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
+    border: 1px solid #e0e0e0;
 }
 
 input {
@@ -51,89 +67,151 @@ input {
     border: none;
     outline: none;
     background: transparent;
-    padding: 12px 15px;
-    font-size: 15px;
-    color: #495057;
+    padding: 15px;
+    font-size: 16px;
 }
 
 button {
     border: none;
     outline: none;
-    padding: 10px 20px;
-    background: #1a1a1a; /* Черная минималистичная кнопка */
+    padding: 15px 25px;
+    background: #ff5945;
     color: #fff;
-    font-size: 14px;
-    font-weight: 500;
+    font-weight: 700;
     cursor: pointer;
-    border-radius: 10px;
-    transition: background 0.3s ease;
+    border-radius: 12px;
+    transition: 0.3s;
 }
 
 button:hover {
-    background: #333;
+    background: #e04a39;
+    transform: scale(1.02);
 }
 
+/* Статистика и Фильтры */
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #666;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.stat-item span {
+    font-weight: 700;
+    color: #764ba2;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    flex: 1;
+    padding: 8px;
+    font-size: 12px;
+    background: #eee;
+    color: #555;
+    border-radius: 8px;
+}
+
+.filter-btn.active {
+    background: #764ba2;
+    color: white;
+}
+
+/* Список задач */
 ul li {
     list-style: none;
-    font-size: 15px;
-    padding: 12px 0px 12px 35px;
+    font-size: 16px;
+    padding: 12px 45px 12px 50px;
     user-select: none;
     cursor: pointer;
     position: relative;
-    color: #343a40;
-    border-bottom: 1px solid #f8f9fa; /* Тонкая разделительная линия */
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #f0f0f0;
     transition: 0.2s;
+    animation: fadeIn 0.4s ease;
 }
 
-ul li:last-child {
-    border-bottom: none;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Кастомный чекбокс (пустой) */
+ul li:hover {
+    border-color: #764ba2;
+}
+
 ul li::before {
     content: '';
     position: absolute;
-    height: 18px;
-    width: 18px;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
     border: 2px solid #ced4da;
-    border-radius: 6px;
     top: 50%;
-    left: 5px;
+    left: 12px;
     transform: translateY(-50%);
-    transition: 0.2s;
 }
 
-/* Когда задача выполнена */
 ul li.checked {
-    color: #adb5bd;
+    color: #888;
+    background: #fdfdfd;
+    text-decoration: line-through;
 }
 
 ul li.checked::before {
-    background-color: #22c55e; /* Зеленый при выполнении */
+    background-color: #22c55e;
     border-color: #22c55e;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
-    background-size: 14px;
+    background-size: 18px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-/* Кнопка удаления (крестик) */
 ul li span {
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    width: 28px;
-    height: 28px;
-    font-size: 18px;
-    color: #dee2e6;
-    line-height: 28px;
+    width: 32px;
+    height: 32px;
+    font-size: 22px;
+    color: #ccc;
+    line-height: 32px;
     text-align: center;
-    border-radius: 8px;
-    transition: 0.2s;
+    border-radius: 50%;
 }
 
 ul li span:hover {
     color: #ff4d4d;
     background: #fff5f5;
+}
+
+.footer {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.clear-all {
+    background: transparent;
+    color: #ff4d4d;
+    padding: 5px 15px;
+    font-size: 13px;
+    border: 1px solid #ff4d4d;
+}
+
+.clear-all:hover {
+    background: #ff4d4d;
+    color: white;
 }
