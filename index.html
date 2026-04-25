@@ -3,47 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro-Tasker | Мой Список Дел</title>
+    <title>Ultimate Task Manager</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Иконки для кнопок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-<div class="container">
-    <div class="todo-app">
-        <header>
-            <div class="date-box">
-                <span id="current-date"></span>
+<div class="background-decor"></div>
+
+<div class="todo-app">
+    <header>
+        <div class="header-top">
+            <h2 id="greeting">Мои задачи</h2>
+            <div class="stats-text">
+                <span id="total-tasks">0</span> задач всего
             </div>
-            <h2>Задачи <img src="https://cdn-icons-png.flaticon.com/512/4697/4697260.png" alt="icon"></h2>
-        </header>
-        
-        <div class="input-row">
-            <input type="text" id="input-box" placeholder="Что планируем сделать?">
-            <button onclick="addTask()">Добавить</button>
         </div>
 
-        <!-- Статистика -->
-        <div class="stats-container">
-            <div class="stat-item">Всего: <span id="total-count">0</span></div>
-            <div class="stat-item">Сделано: <span id="done-count">0</span></div>
+        <!-- Прогресс-бар -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
         </div>
-
-        <!-- Фильтры -->
-        <div class="filters">
-            <button class="filter-btn active" onclick="filterTasks('all')">Все</button>
-            <button class="filter-btn" onclick="filterTasks('active')">В работе</button>
-            <button class="filter-btn" onclick="filterTasks('completed')">Готово</button>
+        <div class="progress-info">
+            Выполнено: <span id="percent-complete">0%</span>
         </div>
+    </header>
 
+    <!-- Поле поиска -->
+    <div class="search-row">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-input" placeholder="Поиск по списку..." onkeyup="searchTasks()">
+    </div>
+    
+    <!-- Поле ввода -->
+    <div class="input-row">
+        <input type="text" id="input-box" placeholder="Добавить новую задачу...">
+        <button onclick="addTask()">Добавить <i class="fas fa-plus"></i></button>
+    </div>
+
+    <!-- Список задач -->
+    <div class="list-wrapper">
         <ul id="list-container">
-            <!-- Задачи -->
+            <!-- Задачи появятся здесь -->
         </ul>
+    </div>
 
-        <div class="footer">
-            <button class="clear-all" onclick="clearAll()">Очистить всё <i class="fas fa-trash-alt"></i></button>
+    <div class="footer">
+        <div class="detailed-stats">
+            <span><i class="fas fa-check-circle"></i> Готово: <b id="done-count">0</b></span>
+            <span><i class="fas fa-clock"></i> В работе: <b id="pending-count">0</b></span>
         </div>
+        <button class="clear-btn" onclick="clearAll()">Очистить всё</button>
     </div>
 </div>
 
