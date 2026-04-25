@@ -1,45 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
+    font-family: 'Inter', sans-serif; /* Более современный шрифт */
 }
 
-.container {
-    width: 100%;
+body {
+    /* Новый минималистичный фон */
+    background-color: #f5f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #153677, #4e085f);
-    padding: 10px;
 }
 
 .todo-app {
     width: 100%;
-    max-width: 540px;
-    background: #fff;
-    margin: 100px auto 20px;
-    padding: 40px 30px 70px;
-    border-radius: 10px;
+    max-width: 400px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 24px; /* Более скругленные углы */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Мягкая, почти незаметная тень */
 }
 
-.todo-app h2 {
-    color: #002765;
+h2 {
+    color: #1a1a1a;
+    font-weight: 500;
+    margin-bottom: 25px;
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    gap: 10px;
 }
 
-.todo-app h2 img {
-    width: 30px;
-    margin-left: 10px;
+h2 img {
+    width: 24px;
 }
 
 .row {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #edeef0;
-    border-radius: 30px;
-    padding-left: 20px;
+    background: #f1f3f5;
+    border-radius: 12px;
+    padding: 5px;
     margin-bottom: 25px;
 }
 
@@ -48,65 +51,89 @@ input {
     border: none;
     outline: none;
     background: transparent;
-    padding: 10px;
+    padding: 12px 15px;
+    font-size: 15px;
+    color: #495057;
 }
 
 button {
     border: none;
     outline: none;
-    padding: 16px 50px;
-    background: #ff5945;
+    padding: 10px 20px;
+    background: #1a1a1a; /* Черная минималистичная кнопка */
     color: #fff;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
-    border-radius: 40px;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #333;
 }
 
 ul li {
     list-style: none;
-    font-size: 17px;
-    padding: 12px 8px 12px 50px;
+    font-size: 15px;
+    padding: 12px 0px 12px 35px;
     user-select: none;
     cursor: pointer;
     position: relative;
+    color: #343a40;
+    border-bottom: 1px solid #f8f9fa; /* Тонкая разделительная линия */
+    transition: 0.2s;
 }
 
-/* Стилизация кастомного чекбокса */
+ul li:last-child {
+    border-bottom: none;
+}
+
+/* Кастомный чекбокс (пустой) */
 ul li::before {
     content: '';
     position: absolute;
-    height: 28px;
-    width: 28px;
-    border-radius: 50%;
-    background-image: url(https://cdn-icons-png.flaticon.com/512/481/481078.png); /* Пустой круг */
-    background-size: cover;
-    background-position: center;
-    top: 12px;
-    left: 8px;
+    height: 18px;
+    width: 18px;
+    border: 2px solid #ced4da;
+    border-radius: 6px;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    transition: 0.2s;
 }
 
+/* Когда задача выполнена */
 ul li.checked {
-    color: #555;
-    text-decoration: line-through;
+    color: #adb5bd;
 }
 
 ul li.checked::before {
-    background-image: url(https://cdn-icons-png.flaticon.com/512/14441/14441151.png); /* Галочка */
+    background-color: #22c55e; /* Зеленый при выполнении */
+    border-color: #22c55e;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+    background-size: 14px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
+/* Кнопка удаления (крестик) */
 ul li span {
     position: absolute;
     right: 0;
-    top: 5px;
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
-    color: #555;
-    line-height: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    font-size: 18px;
+    color: #dee2e6;
+    line-height: 28px;
     text-align: center;
-    border-radius: 50%;
+    border-radius: 8px;
+    transition: 0.2s;
 }
 
 ul li span:hover {
-    background: #edeef0;
+    color: #ff4d4d;
+    background: #fff5f5;
 }
